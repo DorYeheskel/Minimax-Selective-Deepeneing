@@ -1,0 +1,70 @@
+User guide:
+-----------
+Install:
+--------
+* Install Python 3.7 and up.
+* Install packages:
+    > pip install -r libs.txt
+
+Usage:
+------
+This software is running via the command line.
+> python main.py <params>
+
+Will run the game, based on the params given.
+
+To see the full possibilities of the params, use:
+> python main.py --help
+
+This will print to the terminal, all the possible
+params, and what each param is doing.
+
+For example:
+------------
+> python main.py \
+--player1 alpha_beta \
+--max_depth1  4 \
+--filter1 --keep_rate 0.7 \
+--player2 alpha_beta \
+--max_depth2  2 \
+--max_time 120 \
+--open_lichess
+
+Run a game of:
+Player 1 (White), which based on algorithem rb-alphabeta, depth 4, with KeepRate of 70%.
+VS
+Player 2 (Black), which based on algorithem rb-alphabeta, depth 2, without filter.
+
+With 60 sec for each player to play (total time of game is 120sec)
+and open lichess website to paste the game.
+
+The possibilities of player are: minimax/alpha_beta/human/random
+human  : You can play by entering the commands (for example: 'a2a4').
+random : Agent choose random moves.
+
+
+Importent note:
+---------------
+How to see your game ?
+After the game finished, in ./tmp/game.pgn there will be a record of the game.
+
+If you install pyperclip lib successfully (using pip install of the requirements file),
+in the end of the game, this will copied automatic the entire file to your clipboard.
+
+When using: --open_lichess, it will open the lichess website with an empty box,
+and all you need to do is "ctrl + v".
+(or, if the automatic clipboard failed, copy the data of the PGN file to that box)
+
+This is the web: https://lichess.org/paste
+
+
+More:
+-----
+If you want to edit your own board, enter: https://lichess.org/editor
+Then, after edit, copy the "FEN" from that website, and you can start a game with
+that board, using: --fen "<fen>"
+
+For example:
+--fen "8/8/2p1k3/2P3Rp/2Kr3P/8/8/8 w - - 38 148" wil start a new game from that state.
+
+

@@ -1,0 +1,35 @@
+To reprocude the experiments:
+-----------------------------
+*) General:
+- Use Linux os and clone this project.
+- Each of the runs should be done from the main directory.
+
+1) Time experiments:
+    - Enter to the main directory.
+    - Run: > ./experiments/scripts/test_time.sh &
+    - Results should be print to terminal.
+    - Copy the results and create the csv file "./experiments/results/time_results.csv".
+    - Run: > ./experiments/scripts/print_graphs.py
+    - Graph should be printed.
+
+2) Params experiments:
+    - Enter to the main directory.
+    - Run: > ./experiments/scripts/test_params.sh &
+    - Results should be print to terminal.
+    - Copy the results and create the csv file "./experiments/results/params_results_0_4.csv".
+    - Run: > ./experiments/scripts/print_graphs.py
+    - Graph should be printed.
+
+3) Rank experiments:
+    - Enter to the main directory.
+    - Run: > ./experiments/scripts/test_rank.sh &
+    - Results should be print to terminal.
+    - Copy the results and create the csv file "./experiments/results/*.csv".
+    - Run: > ./experiments/scripts/print_graphs.py
+    - Graph should be printed.
+
+*) Note:
+Before running the experiments with time, it is recommanded to disable the log writes.
+Doing this by changing "def print_info(msg)" in utils, to "return None" in the beginning
+of the function (instead of writing to log and stdout a lot of messages).
+

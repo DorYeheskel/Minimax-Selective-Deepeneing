@@ -1,0 +1,65 @@
+-------------------------------------------------------------------------------
+Pseudo code for Minimax selective deepening varient:
+-------------------------------------------------------------------------------
+
+RB-Minimax(State, DecidingAgent, D, KeepRate)
+    If G(State) then return U(State, DecidingAgent)
+    If D=0 then return h(State, Agent)
+    AgentToMove ← Turn(State)
+    Children ← Succ(State, AgentToMove)
+    Children ← Filter(State, Children, KeepRate)
+    If AgentToMove = DecidingAgent then
+        CurMax ← -∞
+        Loop for c in Children
+            v ← RB-Minimax(c, DecidingAgent, D-1)
+            CurMax ← Max(v, CurMax)
+        Return(CurMax)
+    else ;   AgentToMove≠DecidingAgent
+        CurMin ← ∞
+        Loop for c in Children
+            v ← RB-Minimax(c, DecidingAgent, D-1)
+            CurMin ← Min(v, CurMin)
+        Return(CurMin)
+
+-------------------------------------------------------------------------------
+
+RB-AlphaBeta(State, DecidingAgent, D, Alpha, Beta, KeepRate)
+    If G(State) then return U(State, DecidingAgent)
+    If D=0 then return h(State, Agent)
+    AgentToMove ← Turn(State)
+    Children ← Succ(State, AgentToMove)
+    Children ← Filter(State, Children, KeepRate)
+    If AgentToMove = DecidingAgent then
+    CurMax ← -∞
+        Loop for c in Children
+            v ← RB-AlphaBeta(c, DecidingAgent, D-1, Alpha, Beta)
+            CurMax ← Max(v, CurMax)
+            Alpha ← Max(CurMax, Alpha)
+            If CurMax ≥ Beta then return ∞
+        Return CurMax
+    else ;      AgentToMove≠DecidingAgent
+        CurMin ← ∞
+        Loop for c in Children
+            v ← RB-AlphaBeta(c, DecidingAgent, D-1, Alpha, Beta)
+            CurMin ← Min(v, CurMin)
+            Beta ← Min(CurMin, Beta)
+            If CurMin ≤ Alpha then return -∞
+        Return CurMin
+
+-------------------------------------------------------------------------------
+
+Filter(State, Children, KeepRate)
+    ChildrenSorted ← SortChildren(State, Children)
+    Children       ← CutChildren(Children, ChildrenSorted, KeepRate)
+    Return Children
+
+-------------------------------------------------------------------------------
+
+SortChildren(State, Children)
+    NewChildren ← {}
+    Loop for c in Children
+        NewChildren[c] ← H_Deepening(c)
+    Children ← SortByValue(Children, NewChildren)
+    Return Children
+
+-------------------------------------------------------------------------------

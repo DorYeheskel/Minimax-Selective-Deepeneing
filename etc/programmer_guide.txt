@@ -1,0 +1,59 @@
+Programmer_guide:
+-----------------
+This project contain the following src files:
+*) main.py        -  The main file of the project. From here the game start to run. (> python main.py <args>)
+*) argparser.py   -  File for parsing the arguments for main.py. (to see full usage, > python main.py --help)
+*) game.py        -  This file has the main loop of the game.
+*) heuristics.py  -  This file contain the 2 evaluation functions of the chess state and some more helper functions.
+*) algorithems.py -  File consist of the algorithms the agent use. Minimax, Alphabeta, Filter, etc.
+*) utils.py       -  Contain helper functions for the rest of the script files.
+
+NOTE:
+ALL THE FILES ARE WELL DOCUMENTED!
+Here is only a small general explanation of the program.
+
+
+main.py and argparser.py:
+-------------------------
+First, when the user do:
+> python main.py <params>
+Then the main function call "parsing_arguments()"" function from argparser.py to parse the arguments.
+After parsing, the main start a new game, by creating a new "board", by doing:   board = chess.Board(fen=fen)
+This class is the most important class, which consist all the data of the current state of the game.
+To read more about the usage of this class:
+https://python-chess.readthedocs.io/en/latest/
+
+Note that fen is the current board state (default fen is chess.STARTING_FEN, the standart classic chess board).
+the user can give it as param (to check some situations that he want to see how the agent will react).
+
+after it, calling "run_game(params)" function from game.py, with the loop game starting.
+When it finish, the game save to PGN file and then open lichess website, when the user can paste the game to their and watch it.
+
+game.py
+-------------------------
+Inside this file, the function run_game(params) which called from the main.py,
+contain the loop of the game.
+
+Inside the loop, each player choose is move, by doing "get_move(params)".
+get_move will get the next move, by calling the "get_action(params, algorithem_type)" function from algorithems.py.
+
+algorithems.py:
+-------------------------
+Inside this file, the functions of get_action, rb-minimax, rb-alphabeta, filter, etc.
+The get_action function return the best move, based on the algorithem param that given.
+
+Each time that one of the algorithem is calling "evaluation()", it call evaluation function from heuristics.py
+Filter function call "evaluation_move()" from heuristics.py.
+
+heuristics.py
+-------------------------
+Inside this file, the evaluations function of the state, called by the algorithems from algorithems.py.
+Each evaluation function has also some helper functions which also written in this file.
+Each evaluation and helper function are well documented.
+
+utils.py
+-------------------------
+Inside this file, a lot of helper functions.
+Such as: Open web (lichess), open log file, prints, general helper functions and more.
+
+
